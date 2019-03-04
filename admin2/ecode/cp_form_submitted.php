@@ -29,7 +29,7 @@
       //change password
         $db->query("UPDATE users SET password = '$new_hashed' WHERE id = '$user_id'");
         $_SESSION['success_flash'] = 'Your password has been updated!';
-        header('Location: index.php');
+        echo '<script>location.replace("index.php");</script>';
     }
   }
 

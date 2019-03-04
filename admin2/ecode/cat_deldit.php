@@ -24,6 +24,6 @@ if(isset($_GET['edit']) && !empty($_GET['edit'])){
     }
     $delsql2 = "DELETE FROM categories WHERE id = '$delete_id'";
     $db->query($delsql2);
-    header('Location: categories.php');
+    echo '<script>location.replace("categories.php");</script>';
   }
 ?>

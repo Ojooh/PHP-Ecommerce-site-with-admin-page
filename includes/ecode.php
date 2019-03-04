@@ -1,5 +1,5 @@
-<!--<script src="/vendor/jquery/jquery-3.2.1.js"></script>
-<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>-->
+<!-- <script src="/vendor/jquery/jquery-3.2.1.js"></script>
+<script src="/vendor/jquery/jquery-3.2.1.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!-- <script>
@@ -14,6 +14,7 @@ jQuery('#size').change(function(){
 var available = jQuery('#size option:selected').data("available");
 jQuery('#available').val(available);
 });
+
 
 
 function closeModal(){
@@ -59,6 +60,21 @@ function update_cart(mode,edit_id,edit_size){
   })
 }
 
+function update_wish_list(mode,edit_id,edit_size){
+  var data = {"mode" : mode, "edit_id" : edit_id, "edit_size" : edit_size};
+  jQuery.ajax({
+    url : '/Baine/admin2/parsers/update_wish-list.php',
+    method: "post",
+    data : data,
+    success : function(){
+      location.reload();
+    },
+    error : function(){
+      alert("something went wrong.");
+    },
+  })
+}
+
 
 function add_to_wish_list(id,size){
   var data = {"id" : id, "size" : size};
@@ -79,44 +95,46 @@ function add_to_wish_list(id,size){
 
 
   }
+function add_to_cart() {
+
+jQuery('#modal_errors').html("");
+var size = jQuery('#size').val();
+var quantity = jQuery('#quantity').val();
+var available = jQuery('#available').val();
+var nameProduct = jQuery('#product_name').val();
+var error = '';
+var data = jQuery('#add_product_form').serialize();
+if(size == '' || quantity == '' || quantity == 0 || quantity < 1 ){
+  error += '<p class="text-center alert alert-success">Please choose your preferred size and Quantity</p>';
+  jQuery('#modal_errors').html(error);
+  return;
+}
+else if(quantity > available){
+  error += '<p class="text-center alert alert-success"> There are only '+available+' available.</p>';
+  jQuery('#modal_errors').html(error);
+  return;
+}
+else{
+  jQuery.ajax({
+    url : '/Baine/admin2/parsers/add_cart.php',
+    method : 'post',
+    data : data,
+    success : function(){
+  			swal(nameProduct, "is added to cart !", "success").then(function(){
+    location.reload();
+});
+    },
+    error : function(){
+      alert("something went wrong");
+    }
+  });
+}
+
+}
 
 
 
 
-
-function add_to_cart(){
-
-  jQuery('#modal_errors').html("");
-  var size = jQuery('#size').val();
-  var quantity = jQuery('#quantity').val();
-  var available = jQuery('#available').val();
-  var error = '';
-  var data = jQuery('#add_product_form').serialize();
-  if(size == '' || quantity == '' || quantity == 0 || quantity < 1 ){
-    error += '<p class="text-center alert alert-success">Please choose your preferred size and Quantity</p>';
-    jQuery('#modal_errors').html(error);
-    return;
-  }
-  else if(quantity > available){
-    error += '<p class="text-center alert alert-success"> There are only '+available+' available.</p>';
-    jQuery('#modal_errors').html(error);
-    return;
-  }
-  else{
-    jQuery.ajax({
-      url : '/Baine/admin2/parsers/add_cart.php',
-      method : 'post',
-      data : data,
-      success : function(){
-        location.reload();
-      },
-      error : function(){
-        alert("something went wrong")
-      }
-    });
-  }
-
-  }
 
   function login(){
     jQuery('#sidebar_errors').html("");

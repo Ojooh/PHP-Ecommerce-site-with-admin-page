@@ -10,6 +10,7 @@
       unlink($image_url);
       $db->query("UPDATE products SET image = '' WHERE id = '$edit_id'");
       header('Location: users.php?edit='.$edit_id);
+      echo '<script>location.replace("users.php?edit"'.$edit_id.'");</script>';
     }
     $name = ((isset($_POST['name']))?sanitize($_POST['name']):$edit['full_name']);
     $email = ((isset($_POST['email']))?sanitize($_POST['email']):$edit['email']);
@@ -115,7 +116,7 @@ if($_POST){
     }
     $db->query($updatesql3);
     $_SESSION['success_flash'] = 'User has been added';
-    //header('Location: users.php');
+    echo '<script>location.replace("users.php");</script>';
   }
 }
 ?>

@@ -13,13 +13,17 @@
           <div class="form-row">
 
                 <?php for($i = 1;$i <= 12;$i++): ?>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-2">
                     <label for="size<?= $i; ?>">Size</label>
                     <input type="text" name="size<?= $i; ?>" id="size<?= $i; ?>" value="<?= ((!empty($sArray[$i-1]))?$sArray[$i-1]:''); ?>" class="form-control">
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="qty<?=$i;?>">Quantity</label>
+                    <label for="threshold<?=$i;?>">Quantity</label>
                     <input type="number" name="qty<?= $i; ?>" id="qty<?= $i; ?>" value="<?= ((!empty($qArray[$i-1]))?$qArray[$i-1]:''); ?>" min="0" class="form-control">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="qty<?=$i;?>">Threshold</label>
+                    <input type="number" name="threshold<?= $i; ?>" id="threshold<?= $i; ?>" value="<?= ((!empty($tArray[$i-1]))?$tArray[$i-1]:''); ?>" min="0" class="form-control">
                   </div>
               <?php endfor; ?>
             </div>

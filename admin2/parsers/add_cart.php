@@ -15,7 +15,7 @@
     $query = $db->query("SELECT * FROM products WHERE id = '{$product_id}'");
     $product = mysqli_fetch_assoc($query);
 
-    $_SESSION['success_flash'] = $product['title']. ' was added to your cart.';
+    //$_SESSION['success_flash'] = $product['title']. ' was added to your cart.';
 
     //check to see if the cart cookie exists
     if($cart_id != ''){

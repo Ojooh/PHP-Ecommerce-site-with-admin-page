@@ -87,7 +87,7 @@ ob_start();
             <p class="p-t-5">Brand: <?= $brand['brand']; ?></p>
 
             <span class="mtext-106 cl2">
-              &#8358;<?= $product['price'];  ?>
+              &#8358;<?= money($product['price']); ?>
             </span>
 
             <p class="stext-102 cl3 p-t-23">

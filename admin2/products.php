@@ -11,7 +11,7 @@
   if (isset($_GET['delete'])) {
   $id = sanitize($_GET['delete']);
   $db->query("UPDATE products SET deleted = 1 WHERE id = '$id'");
-  header('Location: products.php');
+  echo '<script>location.replace("products.php");</script>';
   }
 
 
@@ -128,14 +128,23 @@
                       <input type="text" class="form-control" name="sizes" id="sizes" value="<?= $sizes;?>" readonly>
                     </div>
                     <div class="form-group col-md-6">
-                       <?php if ($saved_image != ''): ?>
-                          <div class="saved-image">
-                            <img src="<?= $saved_image; ?>" alt="saved image" width="200px" height="200px"/><br>
-                            <a href="products.php?delete_image=1&edit=<?= $edit_id; ?>" class="text-danger">Delete Image</a>
+                       <?php
+                              if ($saved_image != ''):
+                                $imgi = 1;
+                                $images = explode(',', $saved_image);
+                                foreach($images as $image):
+                        ?>
+                          <div class="saved-image col-md-4">
+                            <img src="<?= $image; ?>" alt="saved image" width="auto" height="150px"/><br>
+                            <a href="products.php?delete_image=1&edit=<?= $edit_id; ?>&imgi=<?= $imgi; ?>" class="text-danger">Delete Image</a>
                           </div>
+                        <?php
+                              $imgi++;
+                              endforeach;
+                        ?>
                         <?php else: ?>
                           <label for="photo">Product Image*:</label>
-                          <input type="file" name="photo" class="form-control">
+                          <input type="file" name="photo[]" class="form-control" multiple>
                         <?php endif; ?>
                     </div>
 
@@ -176,7 +185,7 @@
         $featured = (int)$_GET['featured'];
         $featuredsql = "UPDATE products SET featured = '$featured' WHERE id = '$id' AND deleted = 0";
         $db->query($featuredsql);
-        header('Location: products.php');
+        echo '<script>location.replace("products.php");</script>';
       }
 ?>
 !--main content start-->

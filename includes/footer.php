@@ -3,7 +3,7 @@
     $pquery2 = $db->query($sql9);
  ?>
 	<!-- Footer -->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
 <footer class="bg3 p-t-75 p-b-32">
   <div class="container">
     <div class="row">

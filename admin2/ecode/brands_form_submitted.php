@@ -25,7 +25,7 @@
           $sql = "UPDATE brand SET brand = '$brand' WHERE id = '$edit_id'";
         }
         $db->query($sql);
-        header('Location: brands.php');
+        echo '<script>location.replace("brands.php");</script>';
 
       }
     }

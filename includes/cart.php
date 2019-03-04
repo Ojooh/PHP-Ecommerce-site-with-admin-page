@@ -26,15 +26,11 @@
          Total: &#8358;0.00
        </div>
 
-       <div class="header-cart-buttons flex-w w-full">
-         <a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-           View Cart
-         </a>
-
-         <a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+       <!-- <div class="header-cart-buttons flex-w w-full">
+         <a href="/Baine/checkout.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
            Check Out
          </a>
-       </div>
+       </div> -->
      </div>
    </div>
  </div>
@@ -71,8 +67,9 @@
 
        <ul class="header-cart-wrapitem w-full">
          <li class="header-cart-item flex-w flex-t m-b-10">
-           <div class="header-cart-item-img">
-             <img src="<?= $product['image']; ?>" alt="IMG">
+           <div class="header-cart-item-img" onclick="update_cart('remove', '<?= $product['id']; ?>', '<?= $item['size']; ?>');">
+             <?php $photos = explode(',',$product['image']); ?>
+                 <img src="<?= $photos[0]; ?>" alt="IMG-PRODUCT">
            </div>
 
            <div class="header-cart-item-txt p-t-8">
@@ -100,14 +97,10 @@
            Sub-Total: &#8358;<?= money($sub_total); ?>
          </div>
 
-         <div class="header-cart-buttons flex-w w-full">
-           <a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-             View Cart
-           </a>
-
-           <a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-             Check Out
-           </a>
+         <div class="header-cart-buttons flex-w w-full col-12">
+         <a href="/Baine/checkout.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+           Check Out
+         </a>
          </div>
        </div>
 

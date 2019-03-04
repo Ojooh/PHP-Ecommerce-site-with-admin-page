@@ -67,35 +67,20 @@ ob_start();
              <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
              <div class="slick3 gallery-lb">
-               <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+               <?php
+                       $photos = explode(',',$product['image']);
+                       foreach($photos as $photo):
+               ?>
+               <div class="item-slick3" data-thumb="<?= $photo; ?>">
                  <div class="wrap-pic-w pos-relative">
-                   <img src="<?= $product['image']; ?>" alt="IMG-PRODUCT">
+                   <img src="<?= $photo; ?>" alt="IMG-PRODUCT">
 
-                   <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= $product['image']; ?>">
+                   <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= $photo; ?>">
                      <i class="fa fa-expand"></i>
                    </a>
                  </div>
                </div>
-
-               <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                 <div class="wrap-pic-w pos-relative">
-                   <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                   <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-                     <i class="fa fa-expand"></i>
-                   </a>
-                 </div>
-               </div>
-
-               <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                 <div class="wrap-pic-w pos-relative">
-                   <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                   <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-                     <i class="fa fa-expand"></i>
-                   </a>
-                 </div>
-               </div>
+               <?php endforeach; ?>
              </div>
            </div>
          </div>
@@ -104,13 +89,14 @@ ob_start();
        <div class="col-md-6 col-lg-5 p-b-30">
          <div class="p-r-50 p-t-5 p-lr-0-lg">
            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+             <input type="hidden" name="product_name" id = "product_name" value="<?= $product['title']; ?>">
              <?= $product['title']; ?>
            </h4>
 
            <p>Brand: <?= $brand['brand']; ?></p>
 
            <span class="mtext-106 cl2">
-             &#8358;<?= $product['price'];  ?>
+             &#8358;<?= money($product['price']); ?>
            </span>
 
 
@@ -125,6 +111,7 @@ ob_start();
            <form class="p-t-33" action="" id="add_product_form" method="post">
             <input type="hidden" name="product_id" value="<?= $id; ?>">
             <input type="hidden" name="available" id="available" value="">
+            <input type="hidden" name="product_name" id = "product_name" value="<?= $product['title']; ?>">
              <div class="flex-w flex-r-m p-b-10">
                <div class="size-203 flex-c-m respon6">
                  Size
@@ -139,7 +126,10 @@ ob_start();
 
                         $size = $string_array[0];
                         $available = $string_array[1];
-                        echo '<option value="'.$size.'" data-available="'.$available.'">'.$size.' ('.$available.' Available)</option>';
+                        if($available > 0){
+                          echo '<option value="'.$size.'" data-available="'.$available.'">'.$size.' ('.$available.' Available)</option>';
+                        }
+
                   } ?>
                    </select>
                    <div class="dropDownSelect2"></div>
@@ -429,7 +419,8 @@ ob_start();
                          <i class="item-rating pointer zmdi zmdi-star-outline"></i>
                          <i class="item-rating pointer zmdi zmdi-star-outline"></i>
 
-                         <input class="" type="hidden" name="rating" id="rating" value="">
+                         <input class="" type="" name="rating" id="rating" value="">
+
 
                        </span>
                      </div>

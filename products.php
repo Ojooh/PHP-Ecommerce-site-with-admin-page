@@ -30,9 +30,10 @@
     <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
       <!-- Block2 -->
       <div class="block2">
+        <?php $photos = explode(',',$product['image']); ?>
         <div class="block2-pic hov-img0">
           <a href="product-detail.php?id=<?= $product['id']; ?>">
-            <img src="<?= $product['image']; ?>" alt="IMG-PRODUCT">
+            <img src="<?= $photos[0]; ?>" alt="IMG-PRODUCT">
           </a>
 
 
@@ -43,6 +44,7 @@
 
         <div class="block2-txt flex-w flex-t p-t-14">
           <div class="block2-txt-child1 flex-col-l ">
+          <input type="hidden" name="product_name" id = "product_name" value="<?= $product['title']; ?>">
               <button type="submit" id="button">
                 <a href="product-detail.php?id=<?= $product['id']; ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                   <?= $product['title']; ?>
@@ -50,11 +52,12 @@
               </button>
 
             <span class="stext-105 cl3">
-              &#8358;<?= $product['price']; ?>
+              &#8358;<?= money($product['price']); ?>
             </span>
           </div>
 
           <form class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" action="add_wish-list.php">
+
             <a href="#" class="btn-addwish-b2 dis-block pos-relative" onclick="add_to_wish_list('<?= $product['id']; ?>', '<?= $product['sizes']; ?>'); return false">
               <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
               <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
@@ -73,9 +76,6 @@
     </div>
     </div>
   </div>
-
-
-
 
 
 <?php

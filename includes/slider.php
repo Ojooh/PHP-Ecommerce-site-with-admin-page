@@ -1,6 +1,6 @@
 
 	<!-- Slider -->
-	<section class="section-slide">
+<div class = "">
 		<div class="wrap-slick1">
 			<div class="slick1">
 				<div class="item-slick1" style="background-image: url(images/slide-01.jpg);">
@@ -76,4 +76,4 @@
 				</div>
 			</div>
 		</div>
-	</section>
+

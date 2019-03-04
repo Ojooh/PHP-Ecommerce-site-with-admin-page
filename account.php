@@ -1,5 +1,8 @@
 <?php
     require_once 'core/init.php';
+    if(!is_logged_in3()){
+      login_error_redirect();
+    }
     include 'includes/head.php';
     include 'includes/navbar.php';
     //include 'includes/cart.php';

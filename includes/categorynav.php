@@ -1,6 +1,13 @@
 <?php
     $sql = "SELECT * FROM categories WHERE parent = 0";
     $pquery = $db->query($sql);
+
+    $cat_id = ((isset($_REQUEST['cat']))? sanitize($_REQUEST['cat']): '');
+    $sort = ((isset($_REQUEST['sort']))? sanitize($_REQUEST['sort']): '');
+    $min_price = ((isset($_REQUEST['min_price']))? sanitize($_REQUEST['min_price']): '');
+    $max_price = ((isset($_REQUEST['max_price']))? sanitize($_REQUEST['max_price']): '');
+    $b = ((isset($_REQUEST['brand']))? sanitize($_REQUEST['brand']): '');
+    $brandQ= $db->query("SELECT * FROM brand ORDER BY brand");
  ?>
 
 
@@ -39,15 +46,17 @@
     <div class="flex-w flex-sb-m p-b-52">
 
       <!-- Search product -->
-      <div class="dis-none panel-search w-full p-t-10 p-b-15">
+      <form action="searchProducts.php" method="POST" class="dis-none panel-search w-full p-t-10 p-b-15">
         <div class="bor8 dis-flex p-l-15">
+          <?php $search = ((isset($_REQUEST['search']))? sanitize($_REQUEST['search']): ''); ?>
+
           <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
             <i class="zmdi zmdi-search"></i>
           </button>
 
-          <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+          <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search" value="<?= $search; ?>" placeholder="What are you Looking for...?" required>
         </div>
-      </div>
+      </form>
 
       <!-- Categories -->
       <div class="dis-none panel-category w-full p-t-10">
@@ -85,91 +94,78 @@
             <div class="mtext-102 cl2 p-b-15">
               Sort By
             </div>
+            <form action="search.php" method="POST">
+                <input type="hidden" name="cat" value="<?= $cat_id; ?>">
+                <input type="hidden" name="sort" value="0">
+                <div class="flex-w p-t-4 m-r--5">
+                  <div class="flex-c-m stext-107 cl6 size-301 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                  <input type="radio" class="filter-link stext-106 trans-04" name="sort" value="popularity"<?= (($sort == 'popularity')?' checked' : ''); ?>> Popularity
+                </div>
 
-            <ul>
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  Default
-                </a>
-              </li>
+                  <div class="flex-c-m stext-107 cl6 size-301 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                    <input type="radio" class="filter-link stext-106 trans-04" name="sort" value="rating"<?= (($sort == 'rating')?' checked' : ''); ?>> Average rating
+                  </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  Popularity
-                </a>
-              </li>
+                  <div class="flex-c-m stext-107 cl6 size-301 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                    <input type="radio" class="filter-link stext-106 trans-04" name="sort" value="new"<?= (($sort == 'new')?' checked' : ''); ?>> Newness
+                  </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  Average rating
-                </a>
-              </li>
+                  <div class="flex-c-m stext-107 cl6 size-301 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                    <input type="radio" class="filter-link stext-106 trans-04" name="sort" value="low"<?= (($sort == 'low')?' checked' : ''); ?>>  Price: Low To High
+                  </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                  Newness
-                </a>
-              </li>
+                  <div class="flex-c-m stext-107 cl6 size-301 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                    <input type="radio" class="filter-link stext-106 trans-04" name="sort" value="high"<?= (($sort == 'high')?' checked' : ''); ?>> Price: High To Low
+                  </div>
+                </div>
+              </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  Price: Low to High
-                </a>
-              </li>
+              <div class="filter-col2 p-r-15 p-b-27">
+                <div class="mtext-102 cl2 p-b-15">
+                  Price
+                </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  Price: High to Low
-                </a>
-              </li>
-            </ul>
-          </div>
+                <input type="text" name="min_price" class="price-range" placeholder="Min &#8358;" value="<?= $min_price ?>">To
+                <input type="text" name="max_price" class="price-range" placeholder="Max &#8358;" value="<?= $max_price ?>">
+              </div>
 
-          <div class="filter-col2 p-r-15 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">
-              Price
-            </div>
 
-            <ul>
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                  All
-                </a>
-              </li>
+              <div class="filter-col3 p-b-27">
+                <div class="mtext-102 cl2 p-b-15">
+                  Brands
+                </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  $0.00 - $50.00
-                </a>
-              </li>
+                <div class="flex-w p-t-4 m-r--5">
+                  <div class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                  <input type="radio" class="filter-link stext-106 trans-04" name="brand" value=""<?= (($b == '')?' checked' : ''); ?>>All
+                </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  $50.00 - $100.00
-                </a>
-              </li>
+                  <?php while($brand = mysqli_fetch_assoc($brandQ)): ?>
+                    <div  class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                      <input type="radio" class="filter-link stext-106 trans-04" name="brand" value="<?= $brand['id']; ?>"<?= (($b == $brand['id'])?' checked' : ''); ?>><?= $brand['brand']; ?>
+                    </div>
+                  <?php endwhile; ?>
+                </div>
+              </div>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  $100.00 - $150.00
-                </a>
-              </li>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  $150.00 - $200.00
-                </a>
-              </li>
 
-              <li class="p-b-6">
-                <a href="#" class="filter-link stext-106 trans-04">
-                  $200.00+
-                </a>
-              </li>
-            </ul>
-          </div>
+              <div class="filter-col4 p-r-15 p-b-27">
+                <div class="mtext-102 cl2 p-b-15">
+                  Price
+                </div>
 
-          <div class="filter-col3 p-r-15 p-b-27">
+                <!-- <input type="text" name="min_price" class="price-range" placeholder="Min &#8358;" value="">To
+                <input type="text" name="max_price" class="price-range" placeholder="Max &#8358;" value=" -->
+              </div>
+
+              <input type="submit" value="search" class="pull-right flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4">
+            </form>
+
+
+
+
+          <!-- <div class="filter-col6 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
               Color
             </div>
@@ -235,35 +231,9 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> -->
 
-          <div class="filter-col4 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">
-              Tags
-            </div>
 
-            <div class="flex-w p-t-4 m-r--5">
-              <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                Fashion
-              </a>
-
-              <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                Lifestyle
-              </a>
-
-              <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                Denim
-              </a>
-
-              <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                Streetstyle
-              </a>
-
-              <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                Crafts
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -172,11 +172,11 @@
              </span>
 
              <p class="stext-115 cl1 size-213 p-t-18">
-                 <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                 <a href="https://www.facebook.com/baine" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                    <i class="fa fa-facebook"></i>
                  </a>
 
-                 <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                 <a href="https://instagram.com/baine" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                    <i class="fa fa-instagram"></i>
                  </a>
 
@@ -184,8 +184,8 @@
                    <i class="fa fa-twitter"></i>
                  </a>
 
-                 <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                   <i class="fa fa-pinterest-p"></i>
+                 <a href="https://plus.google.com/" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                   <i class="fa fa-google-plus"></i>
                  </a>
              </p>
            </div>

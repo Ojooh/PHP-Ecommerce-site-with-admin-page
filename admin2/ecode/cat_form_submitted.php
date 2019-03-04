@@ -41,7 +41,7 @@
         $updatesql = "UPDATE categories SET category = '$category', parent = '$post_parent' WHERE id = '$edit_id'";
       }
       $db->query($updatesql);
-      header('Location: categories.php');
+      echo '<script>location.replace("categories.php");</script>';
     }
 
   }

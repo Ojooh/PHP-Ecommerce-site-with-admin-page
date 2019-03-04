@@ -61,7 +61,7 @@ if(empty($errors)){
     $insertSql = "UPDATE vendors SET `name` = '$name',`email` = '$email', `number` = `$number`, `password` = '$password', `facebook` = '$facebook', `twitter` = `$twitter`, `instagram` = '$instagram' WHERE id = '$edit_id'";
   }
   $db->query($insertSql);
-  header('Location: vendors.php');
+  echo '<script>location.replace("vendors.php");</script>';
 
 }
   }
@@ -123,7 +123,7 @@ if(empty($errors)){
     $insertSql = "UPDATE vendors SET `name` = '$name',`email` = '$email', `number` = `$number`, `password` = '$hashed', `facebook` = '$facebook', `twitter` = `$twitter`, `instagram` = '$instagram' WHERE id = '$edit_id'";
   }
   $db->query($insertSql);
-  header('Location: vendors.php');
+  echo '<script>location.replace("vendors.php");</script>';
 
 }
 }

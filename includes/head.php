@@ -33,11 +33,15 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 	<link rel="stylesheet" type="text/css" href="css/elegant-icons-style.css"  >
 <!--===============================================================================================-->
 <!--===============================================================================================-->
 <script src="js/slick-custom.js"></script>
+<script type = "text/javascript" src = "https://js.stripe.com/v2/"></script>
+<script src="https://js.stripe.com/v3/"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

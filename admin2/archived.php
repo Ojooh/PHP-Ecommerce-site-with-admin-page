@@ -16,7 +16,7 @@
 if (isset($_GET['undelete'])) {
   $id = sanitize($_GET['undelete']);
   $db->query("UPDATE products SET deleted = 0 WHERE id = '$id'");
-  header('Location: products.php');
+  echo '<script>location.replace("products.php");</script>';
 }
 
 ?>

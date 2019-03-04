@@ -24,6 +24,6 @@ if(isset($_GET['edit']) && !empty($_GET['edit'])){
     }
     $delsql2 = "DELETE FROM states WHERE id = '$delete_id'";
     $db->query($delsql2);
-    header('Location: states.php');
+    echo '<script>location.replace("states.php");</script>';
   }
 ?>

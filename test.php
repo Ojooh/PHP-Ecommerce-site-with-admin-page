@@ -1,11 +1,21 @@
 <?php
-$number =' 0908765432123455';
-if ((!is_numeric($number)) || (strlen((string)$number) < 11)){
-  echo 'Invalid Phone Number entered, Phone Number must be at least 11 characters Long.';
-}
-else {
-  echo '<script> swal("THANK YOU", "Your Account has been created, Proceed to your email for the verification Link !", "success");</script>';
+
+$items = array();
+$items[] = array(
+  array("id"=>"31","size"=>"Large L","quantity"=>"1"),
+  array("id"=>"34","size"=>"N/A","quantity"=>"1"),
+  array("id"=>"29","size"=>"N/A","quantity"=>"1")
+);
+
+$edit_id ="29";
+$edit_size = "N/A";
+foreach($items as $item ){
+  // if($item['id'] != $edit_id && $item['size'] != $edit_size){
+  //   $updated_items[] = $item;
+  // }
+  var_dump($item["id"]);
 }
 
 
-?>
+
+//var_dump($updated_items);

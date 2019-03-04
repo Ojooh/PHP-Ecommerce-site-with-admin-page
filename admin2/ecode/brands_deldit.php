@@ -6,7 +6,7 @@
       $sql2 = "SELECT * FROM brand WHERE id = '$edit_id'";
       $edit_result = $db->query($sql2);
       $ebrand = mysqli_fetch_assoc($edit_result);
-      header('Location: brands.php');
+      echo '<script>location.replace("brands.php");</script>';
     }
 
 
@@ -16,6 +16,6 @@
       $delete_id = sanitize($delete_id);
       $sql2 = "DELETE FROM brand WHERE id = '$delete_id'";
       $db->query($sql2);
-      header('Location: brands.php');
+      echo '<script>location.replace("brands.php");</script>';
 }
 ?>

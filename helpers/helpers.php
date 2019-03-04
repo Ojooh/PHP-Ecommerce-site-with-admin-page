@@ -117,3 +117,25 @@ function get_category($child_id){
   return $category;
 
 }
+
+function sizesToArray($string){
+  $sizey = rtrim($string,',');
+  $sizesArray = explode(',',$sizey);
+  $returnArray = array();
+  foreach($sizesArray as $size){
+    $s = explode(':',$size);
+    $returnArray[] = array("size" => $s[0], "quantity" => $s[1], 'threshold' => $s[2]);
+  }
+
+  return $returnArray;
+}
+
+
+function sizesToString($sizes){
+  $sizeString = '';
+  foreach($sizes as $size){
+    $sizeString .= $size['size'].':'.$size['quantity'].':'.$size['threshold']. ',';
+  }
+  $trimmed = rtrim($sizeString, ',');
+  return $trimmed;
+}

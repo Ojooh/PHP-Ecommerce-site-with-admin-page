@@ -8,20 +8,16 @@
 				<div class="left-top-bar">
 					Free shipping for standard order over $100
 				</div>
-
 				<div class="right-top-bar flex-w h-full">
 					<a href="#" class="flex-c-m trans-04 p-lr-25">
 						Help & FAQs
 					</a>
-
 					<a href="#" class="flex-c-m trans-04 p-lr-25">
 						My Account
 					</a>
-
 					<a href="#" class="flex-c-m trans-04 p-lr-25">
 						EN
 					</a>
-
 					<a href="#" class="flex-c-m trans-04 p-lr-25">
 						USD
 					</a>
@@ -30,7 +26,8 @@
 		</div>-->
 
 		<div class="wrap-menu-desktop">
-			<nav class="limiter-menu-desktop container">
+		<nav class="navbar navbar-expand-lg limiter-menu-desktop container">
+
 
 				<!-- Logo desktop -->
 				<a href="index.php" class="logo">
@@ -214,21 +211,17 @@
 					Free shipping for standard order over $100
 				</div>
 			</li>
-
 			<li>
 				<div class="right-top-bar flex-w h-full">
 					<a href="#" class="flex-c-m p-lr-10 trans-04">
 						Help & FAQs
 					</a>
-
 					<a href="#" class="flex-c-m p-lr-10 trans-04">
 						My Account
 					</a>
-
 					<a href="#" class="flex-c-m p-lr-10 trans-04">
 						EN
 					</a>
-
 					<a href="#" class="flex-c-m p-lr-10 trans-04">
 						USD
 					</a>
@@ -276,12 +269,12 @@
 			<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 				<img src="images/icons/icon-close2.png" alt="CLOSE">
 			</button>
-
-			<form class="wrap-search-header flex-w p-l-15">
+<?php $search = ((isset($_REQUEST['search']))? sanitize($_REQUEST['search']): ''); ?>
+			<form action="searchProducts.php" method="POST" class="wrap-search-header flex-w p-l-15">
 				<button class="flex-c-m trans-04">
 					<i class="zmdi zmdi-search"></i>
 				</button>
-				<input class="plh3" type="text" name="search" placeholder="What are you Looking for...?">
+				<input class="plh3" type="text" name="search" value="<?= $search; ?>"placeholder="What are you Looking for...?" required>
 			</form>
 		</div>
 	</div>

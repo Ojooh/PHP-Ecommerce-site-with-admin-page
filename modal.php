@@ -48,35 +48,20 @@ ob_start();
               <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
               <div class="slick3 gallery-lb">
-                <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                <?php
+                        $photos = explode(',',$product['image']);
+                        foreach($photos as $photo):
+                ?>
+                <div class="item-slick3" data-thumb="<?= $photo; ?>">
                   <div class="wrap-pic-w pos-relative">
-                    <img src="<?= $product['image']; ?>" alt="IMG-PRODUCT">
+                    <img src="<?= $photo; ?>" alt="IMG-PRODUCT">
 
-                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= $photo; ?>">
                       <i class="fa fa-expand"></i>
                     </a>
                   </div>
                 </div>
-
-                <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                  <div class="wrap-pic-w pos-relative">
-                    <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-                      <i class="fa fa-expand"></i>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                  <div class="wrap-pic-w pos-relative">
-                    <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-                      <i class="fa fa-expand"></i>
-                    </a>
-                  </div>
-                </div>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
@@ -86,8 +71,10 @@ ob_start();
           <div class="p-r-50 p-t-5 p-lr-0-lg">
 
             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+              <input type="hidden" name="product_name" id = "product_name" value="<?= $product['title']; ?>">
               <?= $product['title']; ?>
             </h4>
+
 
             <p class="p-t-5">Brand: <?= $brand['brand']; ?></p>
 
